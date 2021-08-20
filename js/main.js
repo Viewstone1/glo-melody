@@ -64,4 +64,25 @@ $(document).ready(function () {
     //функция открыть-закрыть окно
     modal.toggleClass("is-open");
   }
+  let flatsPath = $(".flats path");
+  let flatsLink = $(".flat-link");
+
+  function deleteClass() {
+    flatsPath.removeClass("current-flat");
+    flatsLink.removeClass("current-flat");
+  }
+
+  flatsPath.on("mouseover", function () {
+    deleteClass();
+    $(`[data-flat-link="${$(this).attr("data-flats")}"]`).toggleClass(
+      "current-flat"
+    );
+  });
+
+  flatsLink.on("mouseover", function () {
+    deleteClass();
+    $(`[data-flat="${$(this).attr("data-flats-link")}"]`).toggleClass(
+      "current-flat"
+    );
+  });
 });
