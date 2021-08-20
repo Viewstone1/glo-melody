@@ -13,6 +13,7 @@ $(document).ready(function () {
   let floorPath = $(".main-img path"); //каждый отдельный этаж в SVG
   let counterUp = $(".counter-up"); //переменная для работы стрелки вверх
   let counterDown = $(".counter-down"); //переменная для работы стрелки вниз
+  let viewFlatsBtn = $(".view-flats");
 
   //функция для работы счетчика по наведении(mouseover)
   floorPath.on("mouseover", function () {
@@ -47,6 +48,20 @@ $(document).ready(function () {
         useGrouping: false,
       });
       $(".counter").text(usCurrentFloor);
+      floorPath.removeClass("current-floor");
+      $(`[data-floor=${usCurrentFloor}]`).toggleClass("current-floor");
     }
   });
+  // модальное окно
+  let modal = $(".modal");
+  let modalCloseBtn = $(".modal-close-button");
+
+  floorPath.on("click", toggleModal); //при клике на этаж открыть окно
+  modalCloseBtn.on("click", toggleModal); //при клике на крестик закрыть
+  viewFlatsBtn.on("click", toggleModal); //при клике на кнопку открывается окно
+
+  function toggleModal() {
+    //функция открыть-закрыть окно
+    modal.toggleClass("is-open");
+  }
 });
